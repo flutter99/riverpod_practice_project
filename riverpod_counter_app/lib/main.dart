@@ -7,6 +7,12 @@ final nameProvider = Provider<String>(
   },
 );
 
+final secondNameProvider = Provider<String>(
+  (ref) {
+    return "2nd Read Example";
+  },
+);
+
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -28,18 +34,22 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends ConsumerWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final name = ref.watch(nameProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Riverpod Example'),
+        title: const Text('Riverpod example'),
       ),
       body: Center(
-        child: Text(name),
+        child: Consumer(
+          builder: (context, ref, child) {
+            final name = ref.watch(secondNameProvider);
+            return Text(name);
+          },
+        ),
       ),
     );
   }
