@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final nameProvider = Provider<String>(
+  (ref) {
+    return "Bilal Ahmad";
+  },
+);
+
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
